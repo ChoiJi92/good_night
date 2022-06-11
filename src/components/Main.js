@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { addHeart, addHeartDB, minusHeartDB } from '../redux/modules/contentSlice';
 
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
   console.log(data);
+  const dispatch = useDispatch()
   return (
     <Container>
       {data.map((v) => (
@@ -16,9 +18,17 @@ const Main = () => {
             <div>{v.date}</div>
             </Head>
           <img src={v.imageUrl}></img>
+          {!v.heart_count.includes('jeahoon10000@naver.com') ?
           <FavoriteBorderIcon onClick={() => {
+              dispatch(addHeartDB(v.id,'jeahoon10000@naver.com'))
            
           }} fontSize='large' cursor='pointer'></FavoriteBorderIcon>
+          :
+          <FavoriteIcon style={{color:'red'}} onClick={() => {
+              dispatch(minusHeartDB(v.id,'jeahoon10000@naver.com'))
+           
+          }} fontSize='large' cursor='pointer'></FavoriteIcon>
+        }
           <h1>{v.title}</h1>
           <div>{v.content}</div>
         </Card>

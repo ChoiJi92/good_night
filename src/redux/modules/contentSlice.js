@@ -34,15 +34,36 @@ export const deleteContentDB = () => {
     }
 }
 export const addHeartDB = (content_id,user_id) => {
-    return async function(dispatch){
-        await axios.put(`http://localhost:5001/content/${content_id}`,
-        {heart_count: [user_id]}).then(reponse => {
-            console.log(reponse)
+    return async function(dispatch,getState){
+        console.log(content_id)
+        console.log(user_id)
+        const content = getState().content.content_list.filter(v => v.id === Number(content_id))
+        const new_heart = content[0].heart_count
+        const heart = [...new_heart,user_id]
+        await axios.patch(`http://localhost:5001/content/${content_id}`,{
+            heart_count: heart
+        }).then(reponse => {
+            dispatch(addHeart(reponse.data))
         })
         
         }
     }
-
+    export const minusHeartDB = (content_id,user_id) => {
+        return async function(dispatch,getState){
+            console.log(content_id)
+            console.log(user_id)
+            const content = getState().content.content_list.filter(v => v.id === Number(content_id))
+            const new_heart = content[0].heart_count.filter(v => v !== user_id)
+            console.log(new_heart)
+            await axios.patch(`http://localhost:5001/content/${content_id}`,{
+                heart_count: new_heart
+            }).then(reponse => {
+                console.log('나는 리스폰스',reponse)
+                dispatch(minusHeart(reponse.data))
+            })
+            
+            }
+        }
 
 
 const contentSlice = createSlice({
@@ -62,10 +83,16 @@ const contentSlice = createSlice({
             state.content_list[index]=action.payload
         },
         addHeart:(state,action) => {
-
+            const index = state.content_list.findIndex(v => v.id === action.payload.id)
+            state.content_list[index]=action.payload
+        },
+        minusHeart:(state,action) => {
+            const index = state.content_list.findIndex(v => v.id === action.payload.id)
+            state.content_list[index]=action.payload
         }
+
     }
 })
 
-export const {loadContent,createContent,updateContent,addHeart} = contentSlice.actions
+export const {loadContent,createContent,updateContent,addHeart,minusHeart} = contentSlice.actions
 export default contentSlice.reducer

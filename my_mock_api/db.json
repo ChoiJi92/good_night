@@ -1,38 +1,40 @@
 {
-    "user": [
-      {
-        "email": "jeahoon100@naver.com",
-        "password": "123456789",
-        "nickName": "최지"
-      }
-    ],
-    "content": [
-      {
-        "id": 0,
-        "title": "베게",
-        "imageUrl": "https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20220524_143%2F1653376346734RpPi6_JPEG%2F4pe2o5h_2022522162858651985.jpg&type=sc960_832",
-        "content": "안녕!!!하신가요!!!",
-        "nickName": "닉네임",
-        "heart_count":[],
-        "date": "2022-06-11 11:18:31"
-      },
-      {
-        "id": 1,
-        "title": "수정합니다!!!!!!!!!",
-        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/react-f0076.appspot.com/o/images%2Fcafe.jpg?alt=media&token=524cf17e-6e7e-4a10-9760-3374874fe823",
-        "content": "수정합니다!!",
-        "nickName": "닉네임",
-        "heart_count":[],
-        "date": "2022-06-11 12:54:49"
-      },
-      {
-        "title": "fadsfadsf",
-        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/react-f0076.appspot.com/o/images%2Fback.jpeg?alt=media&token=20a87957-850d-4574-8767-dad50fc60e47",
-        "content": "asdfasf",
-        "nickName": "닉네임",
-        "heart_count":[],
-        "date": "2022-06-11 12:57:37",
-        "id": 2
-      }
-    ]
-  }
+  "user": [
+    {
+      "email": "jeahoon100@naver.com",
+      "password": "123456789",
+      "nickName": "최지"
+    }
+  ],
+  "content": [
+    {
+      "title": "첫번째",
+      "imageUrl": "https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20220524_143%2F1653376346734RpPi6_JPEG%2F4pe2o5h_2022522162858651985.jpg&type=sc960_832",
+      "content": "첫번째 입니다!!!",
+      "nickName": "닉네임",
+      "heart_count": [],
+      "id": 0
+    },
+    {
+      "id": 1,
+      "title": "수정합니다!!!!!!!!!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/react-f0076.appspot.com/o/images%2Fcafe.jpg?alt=media&token=524cf17e-6e7e-4a10-9760-3374874fe823",
+      "content": "수정합니다!!",
+      "nickName": "닉네임",
+      "heart_count": [
+        "jeahoon100@naver.com",
+        "jeahoon10000@naver.com"
+      ],
+      "date": "2022-06-11 12:54:49"
+    },
+    {
+      "title": "fadsfadsf",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/react-f0076.appspot.com/o/images%2Fback.jpeg?alt=media&token=20a87957-850d-4574-8767-dad50fc60e47",
+      "content": "asdfasf",
+      "nickName": "닉네임",
+      "heart_count": [],
+      "date": "2022-06-11 12:57:37",
+      "id": 2
+    }
+  ]
+}
