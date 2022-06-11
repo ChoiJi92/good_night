@@ -35,6 +35,15 @@
       "heart_count": [],
       "date": "2022-06-11 12:57:37",
       "id": 2
+    },
+    {
+      "title": "안녕하세요",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/react-f0076.appspot.com/o/images%2Fprofile_placeholder.png?alt=media&token=ddb1866b-be60-41c4-8bb3-a450a25b2130",
+      "content": "안녕하세요!!!!!ㄹㅇㄹㅇㄹㅇㄹ어ㅣㅊ퍼ㅏ퍼",
+      "nickName": "닉네임",
+      "date": "2022-06-11 18:23:34",
+      "heart_count": [],
+      "id": 3
     }
   ]
 }

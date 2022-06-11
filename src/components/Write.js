@@ -45,6 +45,7 @@ const Write = () => {
         content: content,
         nickName: "닉네임",
         date: now,
+        heart_count:[]
       })
     );
     navigate('/')
