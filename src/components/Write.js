@@ -16,6 +16,7 @@ const Write = () => {
   const [content, setContent] = useState(data[0]?.content);
   const [preview, setPreview] = useState(data[0]?.imageUrl);
   const [image, setImage] = useState();
+  console.log(title)
   const uploadImage = (e) => {
     let reader = new FileReader(); // 이미지 미리보기!!!
     reader.readAsDataURL(e.target.files[0]);
