@@ -9,8 +9,8 @@ const Header = () => {
             <Btn>
             <p>유저이름</p>
             <button onClick={()=>{navigate('/write')}}>write</button>
-            <button>로그인</button>
-            <button>회원가입</button>
+            <button onClick={()=>{navigate('/login')}}>로그인</button>
+            <button onClick={()=>{navigate('/signup')}}>회원가입</button>
             </Btn>
         </Container>
     )
