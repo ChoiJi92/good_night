@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import Heart from './Heart'
 import {
   addHeart,
   addHeartDB,
@@ -44,29 +43,12 @@ const Main = () => {
       {data.map((v,i) => (
         <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}>
           <Head>
-            <div>닉네임</div>
-            <div>{v.createdAt}</div>
+            <div>{v.nickName}</div>
+            <div>{v.date.slice(0,10)}</div>
           </Head>
           <img src={v.imageUrl}></img>
-          {/* {!v.heart_count.includes("jeahoon10000@naver.com") ? (
-            <FavoriteBorderIcon
-              onClick={() => {
-                dispatch(addHeartDB(v.id, "jeahoon10000@naver.com"));
-              }}
-              fontSize="large"
-              cursor="pointer"
-            ></FavoriteBorderIcon>
-          ) : (
-            <FavoriteIcon
-              style={{ color: "red" }}
-              onClick={() => {
-                dispatch(minusHeartDB(v.id, "jeahoon10000@naver.com"));
-              }}
-              fontSize="large"
-              cursor="pointer"
-            ></FavoriteIcon>
-          )} */}
-          {/* <div>좋아요 {v.heart_count.length}개</div> */}
+          <Heart data ={v}></Heart>
+          {/* <div>좋아요 0개</div> */}
           <h1>{v.title}</h1>
           <div >{v.content.length < 30 ? v.content : v.content.slice(0,30)+'...'}</div>
         </Card>

@@ -5,8 +5,10 @@ const instance = axios.create({
 	baseURL: "http://13.125.112.232" 
 });
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmE2ZGIyMDRlZGM2YzcxMjk4NmEyNGMiLCJpYXQiOjE2NTUxMDIyNjd9.auQXnKjOn0xMDczXvZEnR1ziwkJSVKVXIG02FRehPpE'
+const token = localStorage.getItem('token')
+console.log(token)
 // instance.defaults.headers.common["Authorization"] = USER_TOKEN; 
+// instance.defaults.headers.common["Authorization"] = token? `Bearer ${token}` : null; 
 instance.defaults.headers.common["Authorization"] = `Bearer ${token}`; 
 
 export default instance;

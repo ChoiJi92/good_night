@@ -10,13 +10,13 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const Write = () => {
   const params = useParams();
   const data = useSelector((state)=>state.content.content_list).filter(v => v.id === Number(params.id))
+  const user_name = localStorage.getItem('user_name')
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [title, setTitle] = useState(data[0]?.title);
   const [content, setContent] = useState(data[0]?.content);
   const [preview, setPreview] = useState(data[0]?.imageUrl);
   const [image, setImage] = useState();
-  console.log(preview,title,content)
   const uploadImage = (e) => {
     let reader = new FileReader(); // 이미지 미리보기!!!
     reader.readAsDataURL(e.target.files[0]);
@@ -44,9 +44,8 @@ const Write = () => {
         title: title,
         imageUrl:file_url,
         content: content,
-        nickName: "닉네임",
-        createAt: now,
-        heart_count:[]
+        nickName: user_name,
+        date: now,
       })
     );
     navigate('/')
@@ -68,9 +67,8 @@ const Write = () => {
         title: title,
         imageUrl: realImage ? realImage : preview,
         content: content,
-        nickName: "닉네임",
+        nickName: user_name,
         date: now,
-        heart_count:data[0].heart_count
       })
     );
     navigate('/')
@@ -127,7 +125,7 @@ const Container = styled.div`
   
 `;
 const Btn = styled.button`
-  background-color: ${(props) => (props.disabled ? '#CCE5FF' : '#0080FF')};
+  background-color: ${(props) => (props.disabled ? '#E0E0E0' : '#78909C')};
     border: none;
     color: white;
     height: 40px;

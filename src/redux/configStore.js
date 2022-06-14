@@ -14,9 +14,11 @@
 // 리덕스 툴킷!!
 import {configureStore} from '@reduxjs/toolkit'
 import contentReducer from './modules/contentSlice'
+import userReducer from './modules/userSlice'
+import heartReducer from './modules/heartSlice'
 
 const store = configureStore({reducer: {
-    content: contentReducer,
+    content: contentReducer, user:userReducer, heart:heartReducer
 }})
 
 export default store
