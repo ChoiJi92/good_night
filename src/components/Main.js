@@ -8,11 +8,13 @@ import {
   loadContentDB,
   minusHeartDB,
 } from "../redux/modules/contentSlice";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
   console.log(data.length);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [target, setTarget] = useState(null);
   const [page, setPage] = useState(2)
   // 무한스크롤 관련 intersection observer
@@ -41,7 +43,8 @@ const Main = () => {
   return (
     <Container>
       {data.map((v,i) => (
-        <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}>
+        <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}
+        onClick={()=>navigate(`/detail/${i}`)}>
           <Head>
             <div>{v.nickName}</div>
             <div>{v.date.slice(0,10)}</div>

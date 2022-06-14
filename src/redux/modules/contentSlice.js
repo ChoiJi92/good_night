@@ -37,10 +37,14 @@ export const updateContentDB = (data) => {
     });
   };
 };
-export const deleteContentDB = () => {
-  return async function (dispatch) {};
+export const deleteContentDB = (data) => {
+  return async function (dispatch) {
+    await instance.delete(`/api/post/${data}/delete`).then((response) => {
+      console.log('삭제리스폰스',response.data)
+      dispatch(deleteContent(response.data));
+    });
+  };
 };
-
 
 const contentSlice = createSlice({
   name: "content",
@@ -63,6 +67,10 @@ const contentSlice = createSlice({
       );
       state.content_list[index] = action.payload;
     },
+    deleteContent: (state, action) => {
+      const idx = state.content_list.filter((x) => x.id === action.payload.id);
+      state.content_list[idx] = action.payload;
+    },
   },
 });
 
@@ -71,5 +79,6 @@ export const {
   heartLoadContent,
   createContent,
   updateContent,
+  deleteContent
 } = contentSlice.actions;
 export default contentSlice.reducer;
