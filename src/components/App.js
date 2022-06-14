@@ -36,7 +36,7 @@ function App() {
         <Route path="/" element={isloaded && <Main />}></Route>
         <Route path="/write/" element={token ? <Write /> : <Error/> }></Route>
         <Route path="/write/:id" element={isloaded && <Write />}></Route>
-        <Route path="/detail/:index" element={isloaded && <Detail />}></Route>
+        <Route path="/detail/:id" element={isloaded && <Detail />}></Route>
       </Routes>
     </div>
   );

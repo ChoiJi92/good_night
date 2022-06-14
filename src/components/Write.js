@@ -9,8 +9,9 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const Write = () => {
   const params = useParams();
-  const data = useSelector((state)=>state.content.content_list).filter(v => v.id === Number(params.id))
+  const data = useSelector((state)=>state.content.content_list).filter(v => v.id === params.id)
   const user_name = localStorage.getItem('user_name')
+  console.log(data)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [title, setTitle] = useState(data[0]?.title);
@@ -31,7 +32,7 @@ const Write = () => {
   const changeContent = (e) => {
     setContent(e.target.value);
   };
-  const now = moment().format("YYYY-MM-DD HH:mm:ss");
+  // const now = moment().format("YYYY-MM-DD HH:mm:ss");
 
   const addContent = async () => {
     const uploaded_file = await uploadBytes(
@@ -45,10 +46,10 @@ const Write = () => {
         imageUrl:file_url,
         content: content,
         nickName: user_name,
-        date: now,
+        // nDate: now,
       })
     );
-    navigate('/')
+    // navigate('/')
   };
   const updateContent = async () => {
     let realImage;
@@ -68,10 +69,10 @@ const Write = () => {
         imageUrl: realImage ? realImage : preview,
         content: content,
         nickName: user_name,
-        date: now,
+        // nDate: now,
       })
     );
-    navigate('/')
+    // navigate('/')
   }
   return (
     <Container>

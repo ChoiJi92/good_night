@@ -8,7 +8,7 @@ import instance from "./axios";
 //middlewares
 export const createUserDB = (data) => {
   return async function (dispatch) {
-    console.log(data);
+    
     await instance
       .post("/api/user/signup", data)
       .then((response) => {
@@ -26,7 +26,7 @@ export const loginUserDB = (data) => {
   return async function (dispatch) {
     console.log('로그인!!!')
     await instance.post("/api/user/login", data).then((response) => {
-      console.log(response.data);
+      
       localStorage.setItem("token", response.data.token);
       window.location.replace('/')
     });
@@ -36,7 +36,6 @@ export const loginUserDB = (data) => {
 export const loadUserDB = () => {
   return async function (dispatch) {
     await instance.get("/api/user/signup/me").then((response) => {
-      console.log('아이디저장할래!')
       localStorage.setItem("user_name", response.data.nickName);
       localStorage.setItem("user_id", response.data.userId);
       dispatch(loadUser(response.data));

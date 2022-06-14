@@ -15,11 +15,11 @@
 import {configureStore} from '@reduxjs/toolkit'
 import contentReducer from './modules/contentSlice'
 import userReducer from './modules/userSlice'
-import heartReducer from './modules/heartSlice'
+
 import commentSlice from './modules/commentSlice'
 
 const store = configureStore({reducer: {
-    content: contentReducer, user:userReducer, heart:heartReducer, comment:commentSlice
+    content: contentReducer, user:userReducer, comment:commentSlice
 }})
 
 export default store

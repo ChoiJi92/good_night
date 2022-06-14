@@ -10,6 +10,8 @@ import {
 } from "../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
 
+import moment from "moment";
+
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
   console.log(data.length);
@@ -43,15 +45,13 @@ const Main = () => {
   return (
     <Container>
       {data.map((v,i) => (
-        <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}
-        onClick={()=>navigate(`/detail/${i}`)}>
+        <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}>
           <Head>
             <div>{v.nickName}</div>
-            <div>{v.date.slice(0,10)}</div>
+            <div>{v.nDate}</div>
           </Head>
-          <img src={v.imageUrl}></img>
-          <Heart data ={v}></Heart>
-          {/* <div>좋아요 0개</div> */}
+          <img src={v.imageUrl} onClick={()=>navigate(`/detail/${v.id}`)} style={{cursor:'pointer'}}></img>
+          <Heart data ={v.id}></Heart>
           <h1>{v.title}</h1>
           <div >{v.content.length < 30 ? v.content : v.content.slice(0,30)+'...'}</div>
         </Card>

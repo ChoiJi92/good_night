@@ -5,7 +5,6 @@ import styled from 'styled-components'
 const Header = () => {
     const navigate = useNavigate()
     const user_name = localStorage.getItem('user_name')
-    console.log(user_name)
     return (
         <Container>
             <div style={{fontSize:'70px', width:'50%', cursor:'pointer'}} onClick={()=>navigate('/')}>🌙Good Night</div>
@@ -53,7 +52,7 @@ const Btn = styled.div`
         background-color: transparent;
         font-size: medium;
         :hover {
-            color: #0080ff;
+            color: #78909C;
         }
     }
 `

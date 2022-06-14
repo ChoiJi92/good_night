@@ -7,23 +7,26 @@ import instance from "./axios";
 export const loadContentDB = (page) => {
   return async function (dispatch, getState) {
     await instance
-      .get("/api/post/list/", { params: { _page: page, _limit: 4 } })
+      // .get("/api/post/list/", { params: { _page: page, _limit: 4 } })
+      .get("/api/post/list")
       .then((response) => {
         console.log(response.data);
         const data = getState().content.content_list;
-        console.log('나는데이터',data)
+       
         const new_data = [...data, ...response.data];
-        console.log(new_data);
+       console.log(new_data)
         dispatch(loadContent(new_data));
       });
   };
 };
 
 export const createContentDB = (data) => {
+  console.log(data)
   return async function (dispatch) {
     await instance.post("/api/post", data).then((response) => {
       console.log(response);
       dispatch(createContent(response.data));
+      window.location.replace('/')
     });
   };
 };
@@ -33,6 +36,7 @@ export const updateContentDB = (data) => {
     console.log(data);
     await instance.put(`/api/post/${data.id}/modify`, data).then((response) => {
       dispatch(updateContent(response.data));
+      window.location.replace('/')
       // console.log(response)
     });
   };
@@ -41,8 +45,10 @@ export const deleteContentDB = (data) => {
   return async function (dispatch) {
     await instance.delete(`/api/post/${data}/delete`).then((response) => {
       console.log('삭제리스폰스',response.data)
-      dispatch(deleteContent(response.data));
+      dispatch(deleteContent(data));
+      window.location.replace('/')
     });
+
   };
 };
 
@@ -68,8 +74,8 @@ const contentSlice = createSlice({
       state.content_list[index] = action.payload;
     },
     deleteContent: (state, action) => {
-      const idx = state.content_list.filter((x) => x.id === action.payload.id);
-      state.content_list[idx] = action.payload;
+      const new_content = state.content_list.filter((v,i) => i !== action.payload);
+      state.content_list = new_content
     },
   },
 });
