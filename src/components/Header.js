@@ -9,8 +9,8 @@ const Header = () => {
             <Btn>
             <p>유저이름</p>
             <button onClick={()=>{navigate('/write')}}>write</button>
-            <button>로그인</button>
-            <button>회원가입</button>
+            <button>Log in</button>
+            <button>Sign up</button>
             </Btn>
         </Container>
     )
@@ -24,6 +24,7 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+    
 
 `
 const Btn = styled.div`
@@ -37,6 +38,12 @@ const Btn = styled.div`
     }
     button{
         cursor: pointer;
+        border: none;
+        background-color: transparent;
+        font-size: medium;
+        :hover {
+            color: #0080ff;
+        }
     }
 `
 export default Header

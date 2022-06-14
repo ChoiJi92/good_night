@@ -6,17 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState("");
   const [preview, setPreview] = useState();
   const [image, setImage] = useState();
   const params = useParams();
-  const data = useSelector((state) => state.content.content_list).filter(
-    (v) => v.id === Number(params.id)
-  );
+  const data = useSelector((state) => state.content.content_list);
   // const commentData = useSelector((state) => comments);
   // const comments = useSelector((state) => state.comment.comment_list);
-  // const x = params.id;
-  // console.log(x, comments);
+  const x = params.id;
+
+  console.log(x, data);
 
   const uploadImage = (e) => {
     setImage(e.target.files[0]);
@@ -30,30 +29,29 @@ const Detail = () => {
   //comment 값 가져오기
   const changeComment = (e) => {
     setComment(e.target.value);
+    console.log(comment);
   };
-  console.log(comment);
 
   return (
     <>
       <DetailArticleOverview>
         <DetailArticle>
-          {data.map((v) => (
-            <div key={v.id}>
-              <div>{v.nickName}</div>
-              <div>{v.title}</div>
-              <img src={v.imageUrl} alt="이미지"></img>
-            </div>
-          ))}
+          <div key={data[x].contentId}>
+            <div>{data[x].date}</div>
+            <div>{data[x].nickName}</div>
+            <div>{data[x].title}</div>
+            <img src={data[x].imageUrl} alt="이미지"></img>
+          </div>
 
-          <Link to={"/"}>
-            <button
-              onClick={() => {
-                dispatch(deleteContentDB(data[x]));
-              }}
-            >
-              삭제하기
-            </button>
-          </Link>
+          {/* <Link to={"/"}> */}
+          <button
+            onClick={() => {
+              dispatch(deleteContentDB(data[x].contentId));
+            }}
+          >
+            삭제하기
+          </button>
+          {/* </Link> */}
         </DetailArticle>
       </DetailArticleOverview>
 

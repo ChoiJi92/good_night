@@ -16,6 +16,7 @@ const Write = () => {
   const [content, setContent] = useState(data[0]?.content);
   const [preview, setPreview] = useState(data[0]?.imageUrl);
   const [image, setImage] = useState();
+  console.log(preview,title,content)
   const uploadImage = (e) => {
     let reader = new FileReader(); // 이미지 미리보기!!!
     reader.readAsDataURL(e.target.files[0]);
@@ -44,7 +45,8 @@ const Write = () => {
         imageUrl:file_url,
         content: content,
         nickName: "닉네임",
-        date: now,
+        createAt: now,
+        heart_count:[]
       })
     );
     navigate('/')
@@ -64,19 +66,20 @@ const Write = () => {
       updateContentDB({
         id:data[0].id,
         title: title,
-        imageUrl:realImage ? realImage : preview,
+        imageUrl: realImage ? realImage : preview,
         content: content,
         nickName: "닉네임",
         date: now,
+        heart_count:data[0].heart_count
       })
     );
     navigate('/')
   }
   return (
     <Container>
-      <div>{!params.id ? '게시글 작성' : '게시글 수정'}</div>
-      <div>{title}</div>
-      <img src={preview} alt="이미지"></img>
+      <h1 >{!params.id ? '게시글 작성' : '게시글 수정'}</h1>
+      <div style={{fontSize:'30px',height:'40px'}}>Title: {title}</div>
+      <img src={preview}></img>
       <div style={{ height: "100px", border: "1px solid" }}>{content}</div>
       <input
         onChange={changeTitle}
@@ -90,17 +93,19 @@ const Write = () => {
         value={content}
       ></textarea>
       <input type="file" onChange={uploadImage}></input>
-      {!params.id ? <button
-        disabled={!image || !title || !content ? true : false}
+      {!params.id ? <Btn
+      style={{cursor:'pointer'}}
+        disabled={!preview || !title || !content}
         onClick={addContent}
       >
          게시글 등록
-      </button> : <button
-        disabled={!preview || !title || !content ? true : false}
+      </Btn> : <Btn
+      style={{cursor:'pointer'}}
+        disabled={!preview || !title || !content}
         onClick={updateContent}
       >
          게시글 수정
-      </button>}
+      </Btn>}
     </Container>
   );
 };
@@ -109,7 +114,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 20px auto;
+  margin: 10px auto;
   & > * {
     margin-top: 20px;
   }
@@ -119,5 +124,13 @@ const Container = styled.div`
     width: 400px;
     height: 400px;
   }
+  
 `;
+const Btn = styled.button`
+  background-color: ${(props) => (props.disabled ? '#CCE5FF' : '#0080FF')};
+    border: none;
+    color: white;
+    height: 40px;
+    font-size: large;
+`
 export default Write;
