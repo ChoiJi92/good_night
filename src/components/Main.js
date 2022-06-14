@@ -3,14 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Heart from './Heart'
 import {
-  addHeart,
-  addHeartDB,
   loadContentDB,
-  minusHeartDB,
 } from "../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
 
 import moment from "moment";
+import instance from "../redux/modules/axios";
 
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
@@ -36,12 +34,12 @@ const Main = () => {
         threshold: 1,
       });
       observer.observe(target); // target을 보겠다!
-      
     }
     return () => {
       observer && observer.disconnect();
     };
   }, [target]);
+  
   return (
     <Container>
       {data.map((v,i) => (

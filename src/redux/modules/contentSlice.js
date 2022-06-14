@@ -2,8 +2,9 @@ import { async } from "@firebase/util";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import instance from "./axios";
-//middlewares
 
+//middlewares
+// 컨텐츠 로드
 export const loadContentDB = (page) => {
   return async function (dispatch, getState) {
     await instance
@@ -19,9 +20,8 @@ export const loadContentDB = (page) => {
       });
   };
 };
-
+// 컨텐츠 생성
 export const createContentDB = (data) => {
-  console.log(data)
   return async function (dispatch) {
     await instance.post("/api/post", data).then((response) => {
       console.log(response);
@@ -30,17 +30,16 @@ export const createContentDB = (data) => {
     });
   };
 };
+// 컨텐츠 수정 
 export const updateContentDB = (data) => {
   return async function (dispatch) {
-    console.log("수정하러왔어");
-    console.log(data);
     await instance.put(`/api/post/${data.id}/modify`, data).then((response) => {
       dispatch(updateContent(response.data));
       window.location.replace('/')
-      // console.log(response)
     });
   };
 };
+// 컨텐츠 삭제
 export const deleteContentDB = (data) => {
   return async function (dispatch) {
     await instance.delete(`/api/post/${data}/delete`).then((response) => {
