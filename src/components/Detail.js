@@ -1,16 +1,14 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { deleteContentDB, loadDetailContentDB } from "../redux/modules/contentSlice";
-import { Navigate, useParams, Link, useNavigate } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { async } from "@firebase/util";
 import { createCommentDB, loadCommentDB } from "../redux/modules/commentSlice";
-import Comment from "./Comment";
+import CommentList from "./CommentList";
 import Heart from './Heart'
 import moment from "moment";
 import { BsChat } from "react-icons/bs";
-
-
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -20,19 +18,17 @@ const Detail = () => {
   const data = useSelector((state) => state.content.detail_list)
   const user_name = localStorage.getItem("user_name");
   const navigate = useNavigate();
-  // const commentData = useSelector((state) => comments);
-  // const comments = useSelector((state) => state.comment.comment_list);
 
-  //comment 값 가져오기
+  // comment change 확인
   const changeComment = (e) => {
     setComment(e.target.value);
-    console.log(comment);
   };
+  // comment 생성
   const createComment = async () => {
     if (comment) {
       await dispatch(
         createCommentDB({
-          contentId: data[0].contentId,
+          contentId: data.contentId,
           nickName: user_name,
           comment: comment,
           createAt: moment().format("YYYY-MM-DD HH:mm:ss")
@@ -43,13 +39,16 @@ const Detail = () => {
       window.alert("댓글을 입력해 주세요!");
     }
   };
+  // 해당 content에 comment 갯수 알기 위해서 정보가져옴
   const data_comment = useSelector((state) => state.comment.comment_list);
   
+  // comment 등록시 엔터로 등록할수 있도록 구현
   const onKeyPress = (e) => {
     if(e.key ==='Enter'){
       createComment()
     }
   }
+  // 디테일 페이지의 해당 content와 content의 comment 로드
   useEffect(() => {
     async function commentLoad() {
       await dispatch(loadDetailContentDB(params.id))
@@ -67,7 +66,7 @@ const Detail = () => {
           <Middle>
             <div style={{ width: "20%" }}>{data.nickName}</div>
             <Right>
-              <div style={{ width: "50%" ,textAlign:'right'}}>{data.nDate}</div>
+              <div style={{ width: "50%" ,textAlign:'right'}}>{data.createAt}</div>
               {data.nickName === user_name ? (
                 <Btn>
                   <button
@@ -103,14 +102,14 @@ const Detail = () => {
           <CommentInput>
             <input
               onChange={changeComment}
-              placeholder="댓글을 입력해 주세요 "
+              placeholder="댓글을 입력해 주세요 :) "
               value={comment}
               onKeyPress={onKeyPress}
             ></input>
             <button onClick={createComment}>등록</button>
           </CommentInput>
 
-          <Comment></Comment>
+          <CommentList></CommentList>
         </DetailArticle>
       </DetailArticleOverview>
 }
@@ -136,6 +135,7 @@ const DetailArticle = styled.div`
   img {
     width: 100%;
     height: 400px;
+    border-radius: 10px;
   }
 `;
 const Middle = styled.div`

@@ -23,8 +23,8 @@ const Signup = () => {
     // 패스워드 정규표현식
     const passwordCheck = (password) => {
       let _reg =
-        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@$!%*#?&])[0-9a-zA-Z@$!%*#?&]{6,10}$/;
-      // 패스워드는 6 ~ 10자 영문, 숫자 및 특수문자조합
+        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@$!%*#?&])[0-9a-zA-Z@$!%*#?&]{8,}$/;
+      // 패스워드는 8자이상 영문, 숫자 및 특수문자조합
       return _reg.test(password);
     };
     // 유효성 검사
@@ -46,7 +46,7 @@ const Signup = () => {
       // 비밀번호 체크
       if (!passwordCheck(password_ref.current.value)) {
         window.alert(
-          "비밀번호는 6 ~ 10자 영문, 숫자 및 특수문자조합으로 작성하세요!"
+          "비밀번호는 8자 이상 영문, 숫자 및 특수문자조합으로 작성하세요!"
         );
         return;
       }
@@ -65,28 +65,7 @@ const Signup = () => {
       }
       
     };
-      // //  Axios
-      // const callSomethingAxios = () => {
-      //   //post
-      //   let userdata = {
-      //     email: email_ref.currnet.value,
-      //     nickname: nickName_ref.current.value,
-      //     password: password_ref.current.value,
-      //     repeat_password: repeat_password_ref.current.value,
-      //   };
-      //   callSomethingAxios
-      //     .post("api", userdata)
-      //     //api,{데이터}, {config}
-      //     .then((response) => {
-      //       console.log(response);
-      //     });
-      // };
-      // //axios가 알아서 json화해서 요청을 보냄
-
-      // React.useEffect(() => {
-      //   callSomethingAxios();
-      // });
-
+    
     return (
         <Container>
           <SignupWrap>
@@ -113,7 +92,7 @@ const Signup = () => {
                 ref={password_ref}
                 required
               ></input>
-              <p>4 ~ 10자 영문, 숫자 및 특수문자조합</p>
+              <p>8자 이상 영문, 숫자 및 특수문자조합</p>
             </Input>
             <Input>
               <label htmlFor="confirmPassword">비밀번호 확인</label>

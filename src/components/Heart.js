@@ -23,6 +23,7 @@ const Heart = ({ data }) => {
     }
     heartLoad();
   }, []);
+  // 좋아요 추가
   const addHeart = async () => {
     await instance.post(`/api/post/${data}/like`, {
       contentId: data,
@@ -31,6 +32,7 @@ const Heart = ({ data }) => {
     setHeart_count(heart_count + 1);
     setHeartUser([...heartUser, user_name]);
   };
+  // 좋아요 취소
   const deleteHeart = async () => {
     await instance.delete(`/api/post/${data}/unlike`);
     setHeart_count(heart_count - 1);

@@ -10,14 +10,16 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import instance from "../redux/modules/axios";
 
+
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
-  console.log(data.length);
+  console.log(data)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [target, setTarget] = useState(null);
   const [page, setPage] = useState(2)
   // 무한스크롤 관련 intersection observer
+  // page를 넘겨주면서 백엔드 쪽에서 몇번부터 시작해서 가져올지 
   const onIntersect = async ([entry], observer) => {
     //entry.isIntersecting은 내가 지금 target을 보고있니?라는 뜻 그 요소가 화면에 들어오면 true 그전엔 false
     if (entry.isIntersecting) {
@@ -79,6 +81,7 @@ const Card = styled.div`
   img {
     width: 100%;
     height: 400px;
+    border-radius: 10px;
   }
   :hover {
     box-shadow: rgb(0 0 0 / 80%) 0px 5px 15px 0px;

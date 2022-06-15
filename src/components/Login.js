@@ -36,9 +36,11 @@ const Login = () => {
               email:email_ref.current.value,
               password:password_ref.current.value
           }))
+          
         // navigate("/");
       }
     };
+    // 로그인 엔터키로 가능하게 구현
     const onKeyPress = (e) => {
       if(e.key ==='Enter'){
         login()

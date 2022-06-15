@@ -18,6 +18,7 @@ export const loadContentDB = (page) => {
       });
   };
 };
+// 디테일 페이지에서 해당 컨텐츠만 로드
 export const loadDetailContentDB = (id) => {
   return async function (dispatch){
     await instance.get(`/api/post/list/${id}`).then((response)=>{
@@ -37,9 +38,10 @@ export const createContentDB = (data) => {
 };
 // 컨텐츠 수정 
 export const updateContentDB = (data) => {
+  console.log(data)
   return async function (dispatch) {
     await instance.put(`/api/post/${data.id}/modify`, data).then((response) => {
-      dispatch(updateContent(response.data));
+      dispatch(updateContent(data));
       window.location.replace('/')
     });
   };

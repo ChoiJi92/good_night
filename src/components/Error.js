@@ -10,7 +10,7 @@ const Error = () => {
         <p style={{fontSize : "x-large", fontStyle:'bold'}}>
             앗 잠깐!!!!!
         </p>
-        <p>로그인 후 글 쓰기가 가능해요!!</p>
+        <p>로그인 후 이용해 주세요!!</p>
         <Button onClick={() => {
             navigate('/login')
         }}>로그인 하러 가기</Button>

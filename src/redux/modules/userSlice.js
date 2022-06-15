@@ -26,7 +26,7 @@ export const loginUserDB = (data) => {
   return async function (dispatch) {
     console.log('로그인!!!')
     await instance.post("/api/user/login", data).then((response) => {
-      
+      // localStorage에 토큰 저장
       localStorage.setItem("token", response.data.token);
       window.location.replace('/')
     });
@@ -36,6 +36,7 @@ export const loginUserDB = (data) => {
 export const loadUserDB = () => {
   return async function (dispatch) {
     await instance.get("/api/user/signup/me").then((response) => {
+      // localStorage에 유저 이름 , 이메일 저장
       localStorage.setItem("user_name", response.data.nickName);
       localStorage.setItem("user_id", response.data.userId);
       dispatch(loadUser(response.data));
@@ -51,10 +52,8 @@ const userSlice = createSlice({
   },
   reducers: {
     loadUser: (state, action) => {
-      state.user_list.push(action.payload);
+      state.user_list=action.payload;
     },
-    // updateUser(state, action) {},
-    // removeUser(state, action) {},
   },
 });
 

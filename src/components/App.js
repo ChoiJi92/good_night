@@ -19,22 +19,27 @@ function App() {
   const dispatch = useDispatch();
   const [isloaded, setIsloaded] = useState(false);
   const token = localStorage.getItem("token");
-  console.log(token)
+  
+  useEffect(()=> {
+    async function userload(){
+      await dispatch(loadUserDB())
+    }
+    userload()
+  },[])
   useEffect(() => {
     async function load() {
       await dispatch(loadContentDB(0));
-      await dispatch(loadUserDB())
       setIsloaded(true);
     }
     load();
   }, []);
   return (
     <div className="App">
-      <Header></Header>
+      <Header isloaded ={isloaded}></Header>
       <Routes>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/" element={isloaded && <Main />}></Route>
+        <Route path="/" element={isloaded && <Main /> }></Route>
         <Route path="/write/" element={token ? <Write /> : <Error/> }></Route>
         <Route path="/write/:id" element={isloaded && <Write />}></Route>
         <Route path="/detail/:id" element={isloaded && <Detail />}></Route>

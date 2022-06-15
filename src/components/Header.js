@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from 'styled-components'
-const Header = () => {
+const Header = ({isloaded}) => {
     const navigate = useNavigate()
     const user_name = localStorage.getItem('user_name')
     return (
@@ -17,6 +17,7 @@ const Header = () => {
                     navigate('/')}}>Sign out</button>
             </>:
             <>
+            
             <button onClick={() => {navigate('/login')}}>Log in</button>
             <button onClick={() => {navigate('/signup')}}>Sign up</button>
             </>
@@ -34,7 +35,7 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    
+   
 
 `
 const Btn = styled.div`

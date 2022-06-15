@@ -11,13 +11,14 @@ const Write = () => {
   const params = useParams();
   const data = useSelector((state)=>state.content.content_list).filter(v => v.id === params.id)
   const user_name = localStorage.getItem('user_name')
-  console.log(data)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [title, setTitle] = useState(data[0]?.title);
   const [content, setContent] = useState(data[0]?.content);
   const [preview, setPreview] = useState(data[0]?.imageUrl);
   const [image, setImage] = useState();
+  
+  // 이미지 미리보기 기능 구현
   const uploadImage = (e) => {
     let reader = new FileReader(); // 이미지 미리보기!!!
     reader.readAsDataURL(e.target.files[0]);
@@ -34,6 +35,7 @@ const Write = () => {
   };
   // const now = moment().format("YYYY-MM-DD HH:mm:ss");
 
+  // content 추가 
   const addContent = async () => {
     const uploaded_file = await uploadBytes(
       ref(storage, `images/${image.name}`),
@@ -51,27 +53,31 @@ const Write = () => {
     );
     // navigate('/')
   };
+  // content 수정 
   const updateContent = async () => {
     let realImage;
+    
     if(image){
     const uploaded_file = await uploadBytes(
       ref(storage, `images/${image?.name}`),
       image
     );
+    
     const file_url = await getDownloadURL(uploaded_file.ref);
     realImage = file_url
-  }
-    
-    await dispatch(
+    }
+   
+    dispatch(
       updateContentDB({
         id:data[0].id,
         title: title,
-        imageUrl: realImage ? realImage : preview,
+        imageUrl: realImage ? realImage : preview,  // 이미지 변경안하면 원래 작성되어있는 이미지로 저장
         content: content,
         nickName: user_name,
         createAt: moment().format("YYYY-MM-DD HH:mm:ss"),
       })
     );
+    
     // navigate('/')
   }
   return (
@@ -81,11 +87,13 @@ const Write = () => {
       <img src={preview}></img>
       <div style={{ height: "100px", border: "1px solid" }}>{content}</div>
       <input
+      className="title"
         onChange={changeTitle}
         placeholder="제목을 입력해 주세요 :)"
         value={title}
       ></input>
       <textarea
+      className="content"
         style={{ height: "100px" }}
         onChange={changeContent}
         placeholder="글을 작성해 주세요 :)"
@@ -116,10 +124,14 @@ const Container = styled.div`
   margin: 10px auto;
   & > * {
     margin-top: 20px;
+    
   }
-  /* align-items: center; */
+  .title{
+    height: 30px;
+  }
   img {
     border: 1px solid;
+    border-radius: 10px;
     width: 400px;
     height: 400px;
   }
