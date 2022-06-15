@@ -9,7 +9,7 @@ const Heart = ({ data }) => {
   const dispatch = useDispatch();
   const [isloaded, setIsloaded] = useState(false);
   const user_name = localStorage.getItem("user_name");
-  const [heart_count, setHeart_count] = useState();
+  const [heart_count, setHeart_count] = useState(0);
   const [heartUser, setHeartUser] = useState([]);
   useEffect(() => {
     async function heartLoad() {

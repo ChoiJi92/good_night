@@ -12,11 +12,11 @@ import banner from "../css/banner.png";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 
+
 import { amber } from '@mui/material/colors';
 
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
-  console.log(data)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [target, setTarget] = useState(null);
@@ -28,7 +28,6 @@ const Main = () => {
     if (entry.isIntersecting) {
       observer.unobserve(entry.target); // 이제 그 target을 보지 않겠다는 뜻
       await dispatch(loadContentDB(page));
-      console.log(page)
     }
   };
   useEffect(() => {
@@ -45,8 +44,8 @@ const Main = () => {
     };
   }, [target]);
   
-  const color = amber[300]
-  const a = amber[500]
+  const color = amber[500]
+  
   return (
     <>
     <Banner></Banner>
@@ -68,9 +67,10 @@ const Main = () => {
       ))}
     </Container>
     <Fab
+    // onMouseOver={this.}
         color='primary'
         aria-label="add"
-        style={{ backgroundColor:color,position: "fixed", bottom: "10px", right: "10px",}}
+        style={{ backgroundColor:color,position: "fixed", bottom: "25px", right: "25px",}}
       >
         <AddIcon
           onClick={() => {

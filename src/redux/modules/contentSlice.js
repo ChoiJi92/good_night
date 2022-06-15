@@ -10,7 +10,6 @@ export const loadContentDB = (page) => {
   return async function (dispatch, getState) {
     await instance
       .get("/api/post/list/", { params: { page: page} })
-      // .get("/api/post/list")
       .then((response) => {
         const data = getState().content.content_list;
         const new_data = [...data, ...response.data];
@@ -30,7 +29,7 @@ export const loadDetailContentDB = (id) => {
 export const createContentDB = (data) => {
   return async function (dispatch) {
     await instance.post("/api/post", data).then((response) => {
-      console.log(response);
+     
       dispatch(createContent(response.data));
       window.location.replace('/')
     });
@@ -38,7 +37,7 @@ export const createContentDB = (data) => {
 };
 // 컨텐츠 수정 
 export const updateContentDB = (data) => {
-  console.log(data)
+  
   return async function (dispatch) {
     await instance.put(`/api/post/${data.id}/modify`, data).then((response) => {
       dispatch(updateContent(data));

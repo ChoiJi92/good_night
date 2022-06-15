@@ -1,6 +1,5 @@
 import { async } from "@firebase/util";
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import instance from "./axios";
 
@@ -26,9 +25,10 @@ export const loginUserDB = (data) => {
   return async function (dispatch) {
     await instance.post("/api/user/login", data).then((response) => {
       // localStorage에 토큰 저장
-      console.loge(response)
       localStorage.setItem("token", response.data.token);
       window.location.replace('/')
+    }).catch((error) => {
+      window.alert(error.response.data.errorMessage)
     });
     
 }

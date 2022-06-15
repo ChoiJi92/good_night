@@ -13,12 +13,6 @@ const Header = ({ isloaded }) => {
     <>
       <Head>
         <Container>
-          {/* <div
-            style={{ fontSize: "70px", width: "50%", cursor: "pointer" }}
-            onClick={() => navigate("/")}
-          >
-            🌙Good Night
-          </div> */}
           <Btn>
             <p>{user_name}</p>
             {user_name ? (
@@ -109,7 +103,6 @@ const Btn = styled.div`
     font-size: medium;
     color: white;
     :hover {
-      /* color: #78909c; */
       color: #F5BD25;
     }
   }
