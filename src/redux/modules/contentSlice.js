@@ -1,5 +1,6 @@
 import { async } from "@firebase/util";
 import { createSlice } from "@reduxjs/toolkit";
+import { dblClick } from "@testing-library/user-event/dist/click";
 import axios from "axios";
 import instance from "./axios";
 
@@ -8,18 +9,22 @@ import instance from "./axios";
 export const loadContentDB = (page) => {
   return async function (dispatch, getState) {
     await instance
-      // .get("/api/post/list/", { params: { _page: page, _limit: 4 } })
-      .get("/api/post/list")
+      .get("/api/post/list/", { params: { page: page} })
+      // .get("/api/post/list")
       .then((response) => {
-        console.log(response.data);
         const data = getState().content.content_list;
-       
         const new_data = [...data, ...response.data];
-       console.log(new_data)
         dispatch(loadContent(new_data));
       });
   };
 };
+export const loadDetailContentDB = (id) => {
+  return async function (dispatch){
+    await instance.get(`/api/post/list/${id}`).then((response)=>{
+      dispatch(loadDetailContent(response.data))
+    })
+  }
+}
 // 컨텐츠 생성
 export const createContentDB = (data) => {
   return async function (dispatch) {
@@ -55,10 +60,14 @@ const contentSlice = createSlice({
   name: "content",
   initialState: {
     content_list: [],
+    detail_list:[]
   },
   reducers: {
     loadContent: (state, action) => {
       state.content_list = action.payload;
+    },
+    loadDetailContent:(state,action) => {
+      state.detail_list=action.payload
     },
     heartLoadContent: (state, action) => {
       state.content_list = action.payload;
@@ -81,6 +90,7 @@ const contentSlice = createSlice({
 
 export const {
   loadContent,
+  loadDetailContent,
   heartLoadContent,
   createContent,
   updateContent,

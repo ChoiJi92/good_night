@@ -6,22 +6,17 @@ import { deleteCommentDB } from "../redux/modules/commentSlice";
 
 const Comment = () => {
   const data = useSelector((state) => state.comment.comment_list);
-  const user_name = localStorage.getItem('user_name')
-  
- 
-  
+  const user_name = localStorage.getItem('user_name') 
   const dispatch =useDispatch()
-  console.log(data);
+
   return (
     <Container>
       {data.map((v) => (
         <List key={v.id}>
           <div className="nickname">{v.nickName}</div>
           <div className="comment">{v.comment}</div>
-          <div className="date">{v.createdAt.slice(0,10)}</div>
+          <div className="date">{v.createAt}</div>
           {user_name === v.nickName ?
-          
-          
           <button onClick={()=> 
             dispatch(deleteCommentDB({
                 contentId:v.contentId,

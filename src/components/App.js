@@ -19,9 +19,10 @@ function App() {
   const dispatch = useDispatch();
   const [isloaded, setIsloaded] = useState(false);
   const token = localStorage.getItem("token");
+  console.log(token)
   useEffect(() => {
     async function load() {
-      await dispatch(loadContentDB());
+      await dispatch(loadContentDB(0));
       await dispatch(loadUserDB())
       setIsloaded(true);
     }

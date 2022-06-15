@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Heart from './Heart'
 import {
-  loadContentDB,
+  loadContentDB, loadDetailContentDB,
 } from "../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -29,7 +29,7 @@ const Main = () => {
   useEffect(() => {
     let observer;
     if (target) {
-      setPage(page+1)
+      setPage(page+2)
       observer = new IntersectionObserver(onIntersect, {
         threshold: 1,
       });
@@ -46,9 +46,12 @@ const Main = () => {
         <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}>
           <Head>
             <div>{v.nickName}</div>
-            <div>{v.nDate}</div>
+            <div>{v.createAt}</div>
           </Head>
-          <img src={v.imageUrl} onClick={()=>navigate(`/detail/${v.id}`)} style={{cursor:'pointer'}}></img>
+          <img src={v.imageUrl} onClick={()=>{
+            navigate(`/detail/${v.id}`)
+          }
+            } style={{cursor:'pointer'}}></img>
           <Heart data ={v.id}></Heart>
           <h1>{v.title}</h1>
           <div >{v.content.length < 30 ? v.content : v.content.slice(0,30)+'...'}</div>

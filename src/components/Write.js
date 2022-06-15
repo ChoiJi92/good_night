@@ -40,13 +40,13 @@ const Write = () => {
       image
     );
     const file_url = await getDownloadURL(uploaded_file.ref);
-    await dispatch(
+     dispatch(
       createContentDB({
         title: title,
         imageUrl:file_url,
         content: content,
         nickName: user_name,
-        // nDate: now,
+        createAt: moment().format("YYYY-MM-DD HH:mm:ss"),
       })
     );
     // navigate('/')
@@ -69,7 +69,7 @@ const Write = () => {
         imageUrl: realImage ? realImage : preview,
         content: content,
         nickName: user_name,
-        // nDate: now,
+        createAt: moment().format("YYYY-MM-DD HH:mm:ss"),
       })
     );
     // navigate('/')

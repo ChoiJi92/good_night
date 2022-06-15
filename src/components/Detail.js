@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import { deleteContentDB } from "../redux/modules/contentSlice";
+import { deleteContentDB, loadDetailContentDB } from "../redux/modules/contentSlice";
 import { Navigate, useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { async } from "@firebase/util";
 import { createCommentDB, loadCommentDB } from "../redux/modules/commentSlice";
 import Comment from "./Comment";
 import Heart from './Heart'
-
+import moment from "moment";
 import { BsChat } from "react-icons/bs";
 
 
@@ -17,9 +17,7 @@ const Detail = () => {
   const [comment, setComment] = useState("");
   const [isloaded, setIsloaded] = useState(false);
   const params = useParams();
-  const data = useSelector((state) => state.content.content_list).filter(
-    (v) => v.id === params.id
-  );
+  const data = useSelector((state) => state.content.detail_list)
   const user_name = localStorage.getItem("user_name");
   const navigate = useNavigate();
   // const commentData = useSelector((state) => comments);
@@ -37,6 +35,7 @@ const Detail = () => {
           contentId: data[0].contentId,
           nickName: user_name,
           comment: comment,
+          createAt: moment().format("YYYY-MM-DD HH:mm:ss")
         })
       );
       setComment("");
@@ -45,7 +44,7 @@ const Detail = () => {
     }
   };
   const data_comment = useSelector((state) => state.comment.comment_list);
-  console.log(data_comment)
+  
   const onKeyPress = (e) => {
     if(e.key ==='Enter'){
       createComment()
@@ -53,6 +52,7 @@ const Detail = () => {
   }
   useEffect(() => {
     async function commentLoad() {
+      await dispatch(loadDetailContentDB(params.id))
       await dispatch(loadCommentDB(params.id));
       setIsloaded(true);
     }
@@ -63,12 +63,12 @@ const Detail = () => {
     {isloaded && 
       <DetailArticleOverview>
         <DetailArticle>
-          <h1>{data[0].title}</h1>
+          <h1>{data.title}</h1>
           <Middle>
-            <div style={{ width: "20%" }}>{data[0].nickName}</div>
+            <div style={{ width: "20%" }}>{data.nickName}</div>
             <Right>
-              <div style={{ width: "50%" ,textAlign:'right'}}>{data[0].nDate}</div>
-              {data[0].nickName === user_name ? (
+              <div style={{ width: "50%" ,textAlign:'right'}}>{data.nDate}</div>
+              {data.nickName === user_name ? (
                 <Btn>
                   <button
                     onClick={() => {
@@ -79,7 +79,7 @@ const Detail = () => {
                   </button>
                   <button
                     onClick={() => {
-                      dispatch(deleteContentDB(data[0].contentId));
+                      dispatch(deleteContentDB(data.contentId));
                       //   navigate('/')
                     }}
                   >
@@ -92,7 +92,7 @@ const Detail = () => {
             </Right>
           </Middle>
 
-          <img src={data[0].imageUrl} alt="이미지"></img>
+          <img src={data.imageUrl} alt="이미지"></img>
           <Icon>
           <Heart data ={params.id}></Heart>
           <div style={{marginLeft:'10px'}}>
