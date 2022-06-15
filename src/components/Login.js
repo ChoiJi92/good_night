@@ -51,7 +51,7 @@ const Login = () => {
         <Container>
           <LoginWrap>
             <LoginHeader>
-              <LoginTitle>🌙Login</LoginTitle>
+              <LoginTitle>Login</LoginTitle>
             </LoginHeader>
             <Input>
               <label htmlFor="email">이메일</label>
@@ -86,7 +86,7 @@ const Container = styled.div`
 const LoginTitle = styled.label`
   margin-bottom: 20px;
   font-size: 3.2rem;
-  color: black;
+  color: white;
 `;
 
 const LoginHeader = styled.div`
@@ -97,8 +97,8 @@ const LoginHeader = styled.div`
 `;
 
 const LoginWrap = styled.div`
-  margin-top: 5%;
-  background-color: #78909C;
+  margin-top: 30px;
+  background-color: #202133;
   height: 60%;
   width: 30%;
   border-radius: 5%;
@@ -112,7 +112,7 @@ const Input = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0;
-  color: black;
+  color: white;
   font-size: 1.2rem;
   width: 50%;
   p {
@@ -137,11 +137,11 @@ const Btn = styled.button`
   height: 50px;
   border-radius: 5px;
   font-size: 1.5rem;
-  background-color: black;
-  color: white;
+  background-color: white;
+  /* color: black; */
   &:hover {
-    background-color: #CFD8DC;
-    color: black;
+    background-color: #F5BD25;
+    /* color: black; */
   }
 `;
 

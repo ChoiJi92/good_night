@@ -135,8 +135,7 @@ const Btn = styled.div`
   & > * {
     border: none;
     border-radius: 5px;
-    background-color: #78909c;
-    color: white;
+    background-color: #F5BD25;
     width: 50%;
     height: 70%;
     margin-left: 10px;

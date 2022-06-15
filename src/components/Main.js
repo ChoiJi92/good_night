@@ -6,10 +6,9 @@ import {
   loadContentDB, loadDetailContentDB,
 } from "../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
-
 import moment from "moment";
 import instance from "../redux/modules/axios";
-
+import banner from "../css/banner.png";
 
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
@@ -17,7 +16,7 @@ const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [target, setTarget] = useState(null);
-  const [page, setPage] = useState(2)
+  const [page, setPage] = useState(8)
   // 무한스크롤 관련 intersection observer
   // page를 넘겨주면서 백엔드 쪽에서 몇번부터 시작해서 가져올지 
   const onIntersect = async ([entry], observer) => {
@@ -31,7 +30,7 @@ const Main = () => {
   useEffect(() => {
     let observer;
     if (target) {
-      setPage(page+2)
+      setPage(page+8)
       observer = new IntersectionObserver(onIntersect, {
         threshold: 1,
       });
@@ -43,6 +42,8 @@ const Main = () => {
   }, [target]);
   
   return (
+    <>
+    <Banner></Banner>
     <Container>
       {data.map((v,i) => (
         <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}>
@@ -55,29 +56,42 @@ const Main = () => {
           }
             } style={{cursor:'pointer'}}></img>
           <Heart data ={v.id}></Heart>
-          <h1>{v.title}</h1>
-          <div >{v.content.length < 30 ? v.content : v.content.slice(0,30)+'...'}</div>
+          <h1 >{v.title}</h1>
+          <div >{v.content.length < 26 ? v.content : v.content.slice(0,26)+'...'}</div>
         </Card>
       ))}
     </Container>
+    </>
   );
 };
-
+const Banner = styled.div`
+  background: url(${banner});
+  background-size: cover;
+  width: 100%;
+  height: 500px;
+  background-position: center;
+`;
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 95%;
-  margin: 0 auto;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* flex-wrap: wrap; */
+  display: grid;
+  /* grid-template-rows: 1fr 1fr 1fr; */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* grid-gap: 10px; */
+  width: 100%;
+  /* margin: 0 auto; */
 `;
 const Card = styled.div`
-  width: 25%;
-  margin: 20px 20px;
+  width: 80%;
+  margin: 20px auto;
   border: 1px solid;
   border-radius: 10px;
   padding: 10px;
+  /* background-color: #78909C; */
+  /* color: white; */
   img {
     width: 100%;
     height: 400px;

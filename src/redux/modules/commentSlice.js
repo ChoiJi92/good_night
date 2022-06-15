@@ -14,7 +14,7 @@ export const loadCommentDB = (id) => {
 export const createCommentDB = (data) => {
   return async function (dispatch) {
     await instance.post(`/api/comment/${data.contentId}`, data).then((response) => {
-      console.log(response)
+     
       dispatch(createComment(response.data));
 
     });
@@ -22,7 +22,7 @@ export const createCommentDB = (data) => {
 };
 // comment 수정
 export const updateCommentDB = (data) => {
-  console.log(data)
+  
   return async function (dispatch){
     await instance.put(`/api/comment/${data.contentId}/${data.commentId}/modify`, data).then((response)=>{
       dispatch(updateComment(data))

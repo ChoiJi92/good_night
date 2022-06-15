@@ -160,7 +160,7 @@ const Btn = styled.div`
     background-color: transparent;
     cursor: pointer;
     :hover {
-      color: #78909c;
+      color: #F5BD25;
     }
   }
 `;
@@ -178,8 +178,8 @@ const CommentInput = styled.div`
   button{
       border: none;
       border-radius: 5px;
-      background-color: #78909c;
-      color: white;
+      background-color: #F5BD25;
+     
       width: 60px;
   }
 `;

@@ -6,6 +6,7 @@ import { createContentDB, updateContentDB } from "../redux/modules/contentSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { textAlign } from "@mui/system";
 
 const Write = () => {
   const params = useParams();
@@ -83,23 +84,27 @@ const Write = () => {
   return (
     <Container>
       <h1 >{!params.id ? '게시글 작성' : '게시글 수정'}</h1>
-      <div style={{fontSize:'30px',height:'40px'}}>Title: {title}</div>
+      <div style={{minWidth:'90%', fontSize:'30px',height:'40px' ,textAlign:'left'}}>Title: {title}</div>
+      <div className="main">
       <img src={preview}></img>
-      <div style={{ height: "100px", border: "1px solid" }}>{content}</div>
+      <div style={{minWidth:'380px', minHeight: "380px", border: "1px solid", borderRadius:'10px',padding:'10px'}}>{content}</div>
+      </div>
       <input
+      style={{minWidth:'90%'}}
       className="title"
         onChange={changeTitle}
         placeholder="제목을 입력해 주세요 :)"
         value={title}
+        
       ></input>
       <textarea
       className="content"
-        style={{ height: "100px" }}
+        style={{ height: "100px",minWidth:'90%' }}
         onChange={changeContent}
         placeholder="글을 작성해 주세요 :)"
         value={content}
       ></textarea>
-      <input type="file" onChange={uploadImage}></input>
+      <input style={{minWidth:'90%'}}className="file" type="file" onChange={uploadImage}></input>
       {!params.id ? <Btn
       style={{cursor:'pointer'}}
         disabled={!preview || !title || !content}
@@ -117,14 +122,23 @@ const Write = () => {
   );
 };
 const Container = styled.div`
-  width: 80%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 10px auto;
   & > * {
     margin-top: 20px;
     
+  }
+  .main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
   }
   .title{
     height: 30px;
@@ -138,10 +152,14 @@ const Container = styled.div`
   
 `;
 const Btn = styled.button`
-  background-color: ${(props) => (props.disabled ? '#E0E0E0' : '#78909C')};
+  background-color: ${(props) => (props.disabled ? '#FFFFCC' : '#F5BD25')};
     border: none;
-    color: white;
+    border-radius: 5px;
+    /* color: black; */
     height: 40px;
     font-size: large;
+    width: 25%;
+    margin: 20px auto;
+    
 `
 export default Write;
