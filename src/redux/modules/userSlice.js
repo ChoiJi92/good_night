@@ -24,9 +24,9 @@ export const createUserDB = (data) => {
 };
 export const loginUserDB = (data) => {
   return async function (dispatch) {
-    console.log('로그인!!!')
     await instance.post("/api/user/login", data).then((response) => {
       // localStorage에 토큰 저장
+      console.loge(response)
       localStorage.setItem("token", response.data.token);
       window.location.replace('/')
     });

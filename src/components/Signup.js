@@ -158,6 +158,7 @@ const Input = styled.div`
         border: none;
         border: 0 solid #000;
         border-radius: 7px;
+        padding:5px
     }
 `;
 

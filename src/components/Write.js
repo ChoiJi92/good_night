@@ -87,7 +87,7 @@ const Write = () => {
       <div style={{minWidth:'90%', fontSize:'30px',height:'40px' ,textAlign:'left'}}>Title: {title}</div>
       <div className="main">
       <img src={preview}></img>
-      <div style={{minWidth:'380px', minHeight: "380px", border: "1px solid", borderRadius:'10px',padding:'10px'}}>{content}</div>
+      <div style={{ width:'380px', height: "380px", border: "1px solid", borderRadius:'10px',padding:'10px'}}>{content}</div>
       </div>
       <input
       style={{minWidth:'90%'}}
@@ -122,7 +122,7 @@ const Write = () => {
   );
 };
 const Container = styled.div`
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -136,7 +136,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 90%;
   }
@@ -148,6 +148,7 @@ const Container = styled.div`
     border-radius: 10px;
     width: 400px;
     height: 400px;
+    background-size: cover;
   }
   
 `;

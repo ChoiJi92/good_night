@@ -9,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import instance from "../redux/modules/axios";
 import banner from "../css/banner.png";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+
+import { amber } from '@mui/material/colors';
 
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
@@ -41,6 +45,8 @@ const Main = () => {
     };
   }, [target]);
   
+  const color = amber[300]
+  const a = amber[500]
   return (
     <>
     <Banner></Banner>
@@ -61,6 +67,17 @@ const Main = () => {
         </Card>
       ))}
     </Container>
+    <Fab
+        color='primary'
+        aria-label="add"
+        style={{ backgroundColor:color,position: "fixed", bottom: "10px", right: "10px",}}
+      >
+        <AddIcon
+          onClick={() => {
+            navigate('/write');
+          }}
+        />
+      </Fab>
     </>
   );
 };
@@ -84,6 +101,7 @@ const Container = styled.div`
   width: 100%;
   /* margin: 0 auto; */
 `;
+
 const Card = styled.div`
   width: 80%;
   margin: 20px auto;

@@ -70,7 +70,7 @@ const Login = () => {
 
               ></input>
             </Input>
-            <Btn onClick={login} >로그인</Btn>
+            <Btn onClick={login}>로그인</Btn>
           </LoginWrap>
         </Container>
       );
@@ -125,6 +125,7 @@ const Input = styled.div`
     border: none;
     border: 0 solid #000;
     border-radius: 7px;
+    padding:5px
   }
 
 `;

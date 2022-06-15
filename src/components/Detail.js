@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import { deleteContentDB, loadDetailContentDB } from "../redux/modules/contentSlice";
+import {
+  deleteContentDB,
+  loadDetailContentDB,
+} from "../redux/modules/contentSlice";
 import { Navigate, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { async } from "@firebase/util";
 import { createCommentDB, loadCommentDB } from "../redux/modules/commentSlice";
 import CommentList from "./CommentList";
-import Heart from './Heart'
+import Heart from "./Heart";
 import moment from "moment";
 import { BsChat } from "react-icons/bs";
 
@@ -15,7 +18,7 @@ const Detail = () => {
   const [comment, setComment] = useState("");
   const [isloaded, setIsloaded] = useState(false);
   const params = useParams();
-  const data = useSelector((state) => state.content.detail_list)
+  const data = useSelector((state) => state.content.detail_list);
   const user_name = localStorage.getItem("user_name");
   const navigate = useNavigate();
 
@@ -31,7 +34,7 @@ const Detail = () => {
           contentId: data.contentId,
           nickName: user_name,
           comment: comment,
-          createAt: moment().format("YYYY-MM-DD HH:mm:ss")
+          createAt: moment().format("YYYY-MM-DD HH:mm:ss"),
         })
       );
       setComment("");
@@ -41,17 +44,17 @@ const Detail = () => {
   };
   // 해당 content에 comment 갯수 알기 위해서 정보가져옴
   const data_comment = useSelector((state) => state.comment.comment_list);
-  
+
   // comment 등록시 엔터로 등록할수 있도록 구현
   const onKeyPress = (e) => {
-    if(e.key ==='Enter'){
-      createComment()
+    if (e.key === "Enter") {
+      createComment();
     }
-  }
+  };
   // 디테일 페이지의 해당 content와 content의 comment 로드
   useEffect(() => {
     async function commentLoad() {
-      await dispatch(loadDetailContentDB(params.id))
+      await dispatch(loadDetailContentDB(params.id));
       await dispatch(loadCommentDB(params.id));
       setIsloaded(true);
     }
@@ -59,60 +62,66 @@ const Detail = () => {
   }, []);
   return (
     <>
-    {isloaded && 
-      <DetailArticleOverview>
-        <DetailArticle>
-          <h1>{data.title}</h1>
-          <Middle>
-            <div style={{ width: "20%" }}>{data.nickName}</div>
-            <Right>
-              <div style={{ width: "50%" ,textAlign:'right'}}>{data.createAt}</div>
-              {data.nickName === user_name ? (
-                <Btn>
-                  <button
-                    onClick={() => {
-                      navigate(`/write/${params.id}`);
-                    }}
-                  >
-                    수정
-                  </button>
-                  <button
-                    onClick={() => {
-                      dispatch(deleteContentDB(data.contentId));
-                      //   navigate('/')
-                    }}
-                  >
-                    삭제
-                  </button>
-                </Btn>
-              ) : (
-                <></>
-              )}
-            </Right>
-          </Middle>
+      {isloaded && (
+        <DetailArticleOverview>
+          <DetailArticle>
+            <h1>{data.title}</h1>
+            <Middle>
+              <div style={{ width: "20%" }}>{data.nickName}</div>
+              <Right>
+                <div style={{ width: "50%", textAlign: "right" }}>
+                  {data.createAt}
+                </div>
+                {data.nickName === user_name ? (
+                  <Btn>
+                    <button
+                      onClick={() => {
+                        navigate(`/write/${params.id}`);
+                      }}
+                    >
+                      수정
+                    </button>
+                    <button
+                      onClick={() => {
+                        dispatch(deleteContentDB(data.contentId));
+                        //   navigate('/')
+                      }}
+                    >
+                      삭제
+                    </button>
+                  </Btn>
+                ) : (
+                  <></>
+                )}
+              </Right>
+            </Middle>
+            <Content>
+              <img src={data.imageUrl} alt="이미지"></img>
+              <div>{data.content}</div>
+            </Content>
+            <Icon>
+              <Heart data={params.id}></Heart>
+              <div style={{ marginLeft: "10px" }}>
+                <BsChat fontSize="30px" style={{ padding: "2px" }}></BsChat>
+                <div style={{ marginTop: "1px" }}>
+                  댓글 {data_comment.length}개
+                </div>
+              </div>
+            </Icon>
+            <CommentInput>
+              <input
+                onChange={changeComment}
+                placeholder="댓글을 입력해 주세요 :) "
+                value={comment}
+                onKeyPress={onKeyPress}
+              ></input>
+              <button onClick={createComment}>등록</button>
+            </CommentInput>
 
-          <img src={data.imageUrl} alt="이미지"></img>
-          <Icon>
-          <Heart data ={params.id}></Heart>
-          <div style={{marginLeft:'10px'}}>
-          <BsChat fontSize='30px' style={{padding:'2px'}}></BsChat>
-          <div style={{marginTop:'1px'}}>댓글 {data_comment.length}개</div>
-          </div>
-          </Icon>
-          <CommentInput>
-            <input
-              onChange={changeComment}
-              placeholder="댓글을 입력해 주세요 :) "
-              value={comment}
-              onKeyPress={onKeyPress}
-            ></input>
-            <button onClick={createComment}>등록</button>
-          </CommentInput>
-
-          <CommentList></CommentList>
-        </DetailArticle>
-      </DetailArticleOverview>
-}
+            <CommentList></CommentList>
+          </DetailArticle>
+        </DetailArticleOverview>
+      )}
     </>
   );
 };
@@ -143,15 +152,35 @@ const Middle = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+const Content = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+  img{
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    background-size: cover;
+    
+  }
+  div{
+    margin-top: 30px;
+    border-bottom: 1px solid;
+    padding: 5px;
+    width: 100%;
+    height: 100px;
+  }
+
+`
 const Right = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 40%;
 `;
 const Icon = styled.div`
-display: flex;
-flex-direction: row;
-`
+  display: flex;
+  flex-direction: row;
+`;
 const Btn = styled.div`
   & > * {
     margin-left: 5px;
@@ -160,7 +189,7 @@ const Btn = styled.div`
     background-color: transparent;
     cursor: pointer;
     :hover {
-      color: #F5BD25;
+      color: #f5bd25;
     }
   }
 `;
@@ -172,15 +201,15 @@ const CommentInput = styled.div`
   flex-direction: row;
   justify-content: space-between;
   /* margin: 20px auto; */
-  input{
-      width: 90%;
+  input {
+    width: 90%;
   }
-  button{
-      border: none;
-      border-radius: 5px;
-      background-color: #F5BD25;
-     
-      width: 60px;
+  button {
+    border: none;
+    border-radius: 5px;
+    background-color: #f5bd25;
+
+    width: 60px;
   }
 `;
 

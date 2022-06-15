@@ -36,7 +36,7 @@ const Header = ({ isloaded }) => {
                     window.location.replace("/");
                   }}
                 >
-                  Sign out
+                  Log out
                 </button>
               </>
             ) : (
