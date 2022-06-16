@@ -7,11 +7,11 @@
 - 2022.06.10 ~ 2022.06.16
 - Front-end
 	- 최지훈 [Github](https://github.com/Choiji92)
-	- 이성일
-	- 변희재
+	- 이성일 [Github](https://github.com/a01040579861)
+	- 변희재 [Github](https://github.com/qusgmlwo)
 - Back-end
-	- 윤기남
-	- 홍승현
+	- 윤기남 [Github](https://github.com/wea9677)
+	- 홍승현 [Github](https://github.com/seunghyeon5)
 
 ## 💻 Front-end 
 - 회원가입, 로그인 기능 구현
@@ -20,7 +20,7 @@
 - 무한스크롤 기능 구현
 
 ## 💻 Back-end
-링크
+[Back-end](https://github.com/seunghyeon5/Hanghae-mini)
 
 ## 🌎 Website
 [GoodNight](http://choijireact.s3-website.ap-northeast-2.amazonaws.com/)
@@ -73,5 +73,5 @@
 
 ## ⚙️ Trouble Shooting
 - 무한 스크롤 구현시 게시글을 몇번 부터 불러올지에 대한 정보를 백엔드로 보내줘야하는데 그 정보를 main component에서 state로 구현했더니 상세페이지를 들어갔다가 다시 메인페이지로 돌아오면 state가 초기화 되면서 또 다시 컨텐츠들이 로드됨
--> 게시글을 몇번 부터 불러올지에 대한 정보를 Redux Store에 initialState에 만들어서 추가 로드 될때마다 그 정보를 업데이트하여 백엔드로 보내줌으로써 해결함
+ -> 게시글을 몇번 부터 불러올지에 대한 정보를 Redux Store에 initialState에 만들어서 추가 로드 될때마다 그 정보를 업데이트하여 백엔드로 보내줌으로써 해결함
 
