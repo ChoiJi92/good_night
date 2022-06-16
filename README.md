@@ -23,7 +23,7 @@
 링크
 
 ## 🌎 Website
-[GoodNigh](http://choijireact.s3-website.ap-northeast-2.amazonaws.com/)
+[GoodNight](http://choijireact.s3-website.ap-northeast-2.amazonaws.com/)
 
 ## 🎬 기능 구현 영상
 영상링크
