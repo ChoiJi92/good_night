@@ -29,16 +29,7 @@ const Signup = () => {
     };
     // 유효성 검사
     const signup = async () => {
-      // 회원가입 정보 란 비어있을때
-      // if (
-      //   email_ref.current.value === "" ||
-      //   password_ref.current.value === "" ||
-      //   nickName_ref.current.value === ""
-      // ) {
-      //   window.alert("정보를 입력해주세요.")
-      //   email_ref.current.focus()
-      //   return;
-      // }
+      
       // 이메일 체크
       if (!emailCheck(email_ref.current.value)) {
         window.alert("이메일 형식이 맞지 않습니다!");

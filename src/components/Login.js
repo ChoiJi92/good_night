@@ -22,11 +22,7 @@ const Login = () => {
 
   // 유효성 검사
   const login = async () => {
-    // 이메일과 비밀번호가 비어있을때
-    // if (email_ref.current.value === "" || password_ref.current.value === "") {
-    //   window.alert("이메일과 비밀번호를 입력하세요!");
-    //   return;
-    // }
+    
     // 이메일 체크(이메일이 비었을 때도 해당)
     if (!emailCheck(email_ref.current.value)) {
       window.alert("이메일 형식이 맞지 않습니다!");

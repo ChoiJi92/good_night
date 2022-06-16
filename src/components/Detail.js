@@ -165,12 +165,12 @@ justify-content: center;
     
   }
   div{
+    white-space: pre-wrap;
     margin-top: 30px;
     border-bottom: 1px solid;
     padding: 5px;
     width: 100%;
     height: 100px;
-    white-space: pre-wrap;
   }
 
 `
