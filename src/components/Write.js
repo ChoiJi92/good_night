@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
 import { createContentDB, updateContentDB } from "../redux/modules/contentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { textAlign } from "@mui/system";
+
 
 const Write = () => {
   const params = useParams();

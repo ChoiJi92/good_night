@@ -108,17 +108,17 @@ const Detail = () => {
                 </div>
               </div>
             </Icon>
-            {user_name && 
-            <CommentInput>
-              <input
-                onChange={changeComment}
-                placeholder="댓글을 입력해 주세요 :) "
-                value={comment}
-                onKeyPress={onKeyPress}
-              ></input>
-              <button onClick={createComment}>등록</button>
-            </CommentInput>
-}
+            {user_name && (
+              <CommentInput>
+                <input
+                  onChange={changeComment}
+                  placeholder="댓글을 입력해 주세요 :) "
+                  value={comment}
+                  onKeyPress={onKeyPress}
+                ></input>
+                <button onClick={createComment}>등록</button>
+              </CommentInput>
+            )}
             <CommentList></CommentList>
           </DetailArticle>
         </DetailArticleOverview>
@@ -154,17 +154,16 @@ const Middle = styled.div`
   justify-content: space-between;
 `;
 const Content = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-  img{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  img {
     width: 800px;
     height: 400px;
     margin: 0 auto;
     background-size: cover;
-    
   }
-  div{
+  div {
     white-space: pre-wrap;
     margin-top: 30px;
     border-bottom: 1px solid;
@@ -172,8 +171,7 @@ justify-content: center;
     width: 100%;
     height: 100px;
   }
-
-`
+`;
 const Right = styled.div`
   display: flex;
   justify-content: flex-end;
