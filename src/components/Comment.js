@@ -116,14 +116,6 @@ const List = styled.div`
   .date {
     width: 15%;
   }
-  /* button{
-    border: none;
-      border-radius: 5px;
-      background-color: #78909c;
-      color: white;
-      width: 60px;
-      height: 60%;
-} */
 `;
 const Btn = styled.div`
   width: 10%;

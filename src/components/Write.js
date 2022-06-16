@@ -95,7 +95,6 @@ const Write = () => {
         onChange={changeTitle}
         placeholder="제목을 입력해 주세요 :)"
         value={title}
-        
       ></input>
       <textarea
       className="content"

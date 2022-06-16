@@ -27,30 +27,5 @@ const Container = styled.div`
   width: 100%;
   /* margin: 0, auto; */
 `;
-const List = styled.div`
-display:flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-height: 50px;
-/* width: 90%; */
-/* margin: 0 auto; */
-.nickname {
-    width: 10%;
-}
-.comment{
-    width: 60%;
-}
-.date{
-    width: 15%;
-}
-button{
-    border: none;
-      border-radius: 5px;
-      background-color: #78909c;
-      color: white;
-      width: 60px;
-      height: 50%;
-}
-`
+
 export default CommentList;
