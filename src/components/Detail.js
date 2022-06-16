@@ -108,6 +108,7 @@ const Detail = () => {
                 </div>
               </div>
             </Icon>
+            {user_name && 
             <CommentInput>
               <input
                 onChange={changeComment}
@@ -117,7 +118,7 @@ const Detail = () => {
               ></input>
               <button onClick={createComment}>등록</button>
             </CommentInput>
-
+}
             <CommentList></CommentList>
           </DetailArticle>
         </DetailArticleOverview>

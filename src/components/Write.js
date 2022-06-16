@@ -104,7 +104,7 @@ const Write = () => {
         placeholder="글을 작성해 주세요 :)"
         value={content}
       ></textarea>
-      <input style={{minWidth:'90%'}}className="file" type="file" onChange={uploadImage}></input>
+      <input style={{minWidth:'90%'}}className="file" type="file" accept="image/*" onChange={uploadImage}></input>
       {!params.id ? <Btn
       style={{cursor:'pointer'}}
         disabled={!preview || !title || !content}
