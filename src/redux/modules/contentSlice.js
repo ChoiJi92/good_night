@@ -6,14 +6,16 @@ import instance from "./axios";
 
 //middlewares
 // 컨텐츠 로드
-export const loadContentDB = (page) => {
+export const loadContentDB = () => {
   return async function (dispatch, getState) {
+    const page = getState().content.page
     await instance
       .get("/api/post/list/", { params: { page: page} })
       .then((response) => {
         const data = getState().content.content_list;
         const new_data = [...data, ...response.data];
-        dispatch(loadContent(new_data));
+        const new_page = page+8
+        dispatch(loadContent({data:new_data,page:new_page}));
       });
   };
 };
@@ -61,11 +63,14 @@ const contentSlice = createSlice({
   name: "content",
   initialState: {
     content_list: [],
-    detail_list:[]
+    detail_list:[],
+    page:0
   },
   reducers: {
     loadContent: (state, action) => {
-      state.content_list = action.payload;
+      console.log(action.payload)
+      state.content_list = action.payload.data;
+      state.page = action.payload.page
     },
     loadDetailContent:(state,action) => {
       state.detail_list=action.payload

@@ -28,7 +28,7 @@ function App() {
   },[])
   useEffect(() => {
     async function load() {
-      await dispatch(loadContentDB(0));
+      await dispatch(loadContentDB());
       setIsloaded(true);
     }
     load();

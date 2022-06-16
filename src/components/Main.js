@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Heart from './Heart'
+import Heart from "./Heart";
 import {
-  loadContentDB, loadDetailContentDB,
+  loadContentDB,
+  loadDetailContentDB,
 } from "../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -12,28 +13,25 @@ import banner from "../css/banner.png";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 
-
-import { amber } from '@mui/material/colors';
+import { amber } from "@mui/material/colors";
 
 const Main = () => {
   const data = useSelector((state) => state.content.content_list);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [target, setTarget] = useState(null);
-  const [page, setPage] = useState(8)
   // 무한스크롤 관련 intersection observer
-  // page를 넘겨주면서 백엔드 쪽에서 몇번부터 시작해서 가져올지 
+  // page를 넘겨주면서 백엔드 쪽에서 몇번부터 시작해서 가져올지
   const onIntersect = async ([entry], observer) => {
     //entry.isIntersecting은 내가 지금 target을 보고있니?라는 뜻 그 요소가 화면에 들어오면 true 그전엔 false
     if (entry.isIntersecting) {
       observer.unobserve(entry.target); // 이제 그 target을 보지 않겠다는 뜻
-      await dispatch(loadContentDB(page));
+      await dispatch(loadContentDB());
     }
   };
   useEffect(() => {
     let observer;
     if (target) {
-      setPage(page+8)
       observer = new IntersectionObserver(onIntersect, {
         threshold: 1,
       });
@@ -43,40 +41,50 @@ const Main = () => {
       observer && observer.disconnect();
     };
   }, [target]);
-  
-  const color = amber[500]
-  
+
+  const color = amber[500];
+
   return (
     <>
-    <Banner></Banner>
-    <Container>
-      {data.map((v,i) => (
-        <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}>
-          <Head>
-            <div>{v.nickName}</div>
-            <div>{v.createAt}</div>
-          </Head>
-          <img src={v.imageUrl} onClick={()=>{
-            navigate(`/detail/${v.id}`)
-          }
-            } style={{cursor:'pointer'}}></img>
-          <Heart data ={v.id}></Heart>
-          <h1 >{v.title}</h1>
-          <div >{v.content.length < 26 ? v.content : v.content.slice(0,26)+'...'}</div>
-        </Card>
-      ))}
-    </Container>
-    <Fab
-    // onMouseOver={this.}
-        color='primary'
+      <Banner></Banner>
+      <Container>
+        {data.map((v, i) => (
+          <Card key={v.id} ref={i === data.length - 1 ? setTarget : null}>
+            <Head>
+              <div>{v.nickName}</div>
+              <div>{v.createAt}</div>
+            </Head>
+            <img
+              src={v.imageUrl}
+              onClick={() => {
+                navigate(`/detail/${v.id}`);
+              }}
+              style={{ cursor: "pointer" }}
+            ></img>
+            <Heart data={v.id}></Heart>
+            <h1>{v.title}</h1>
+            <div>
+              {v.content.length < 26
+                ? v.content
+                : v.content.slice(0, 26) + "..."}
+            </div>
+          </Card>
+        ))}
+      </Container>
+      <Fab
+        onClick={() => {
+          navigate("/write");
+        }}
+        color="primary"
         aria-label="add"
-        style={{ backgroundColor:color,position: "fixed", bottom: "25px", right: "25px",}}
+        style={{
+          backgroundColor: color,
+          position: "fixed",
+          bottom: "25px",
+          right: "25px",
+        }}
       >
-        <AddIcon
-          onClick={() => {
-            navigate('/write');
-          }}
-        />
+        <AddIcon/>
       </Fab>
     </>
   );
