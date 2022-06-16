@@ -170,6 +170,7 @@ justify-content: center;
     padding: 5px;
     width: 100%;
     height: 100px;
+    white-space: pre-wrap;
   }
 
 `

@@ -87,7 +87,7 @@ const Write = () => {
       <div style={{minWidth:'90%', fontSize:'30px',height:'40px' ,textAlign:'left'}}>Title: {title}</div>
       <div className="main">
       <img src={preview}></img>
-      <div style={{ width:'380px', height: "380px", border: "1px solid", borderRadius:'10px',padding:'10px'}}>{content}</div>
+      <div style={{ whiteSpace:'pre-wrap',width:'380px', height: "380px", border: "1px solid", borderRadius:'10px',padding:'10px'}}>{content}</div>
       </div>
       <input
       style={{minWidth:'90%'}}
