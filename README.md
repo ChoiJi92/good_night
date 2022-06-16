@@ -6,7 +6,7 @@
 ## 📆 제작 기간 및 팀원 소개 👨‍💻
 - 2022.06.10 ~ 2022.06.16
 - Front-end
-	- 최지훈
+	- 최지훈 [Github](https://github.com/Choiji92)
 	- 이성일
 	- 변희재
 - Back-end
@@ -23,15 +23,15 @@
 링크
 
 ## 🌎 Website
-사이트
+[GoodNigh](http://choijireact.s3-website.ap-northeast-2.amazonaws.com/)
 
 ## 🎬 기능 구현 영상
 영상링크
 
 ## 📝 노션 설계 페이지
-
+[노션 페이지](https://teamsparta.notion.site/S-A-3-e2bbc99e7ce1472b8fb5a9e264f0bdbd)
 ## 와이어 프레임
-
+[Figma](https://www.figma.com/file/C1gHoQyWs2VNG9WwyH2jLI/mini_project_3-team-library?node-id=0%3A1)
 ## 🛠 Front-end 기술 스택 및 개발 환경
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
   <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
