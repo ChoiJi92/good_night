@@ -7,9 +7,9 @@ const Error = () => {
 
     return (
         <Container>
-        <p style={{fontSize : "x-large", fontStyle:'bold'}}>
+        <h1 style={{fontSize : "xx-large", fontStyle:'bold'}}>
             앗 잠깐!!!!!
-        </p>
+        </h1>
         <p>로그인 후 이용해 주세요!!</p>
         <Button onClick={() => {
             navigate('/login')
@@ -25,16 +25,18 @@ const Container = styled.div`
   align-items: center;
   margin: 20px auto;
   width: 80%;
-  
+  p{
+    font-size: x-large;
+  }
 `;
 const Button = styled.button`
-  width: 50%;
+  width: 30%;
   height: 50px;
-  background-color: #78909C;
-  color: white;
+  background-color: #F5BD25;
   margin: 20px;
   font-size: 2rem;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
 
 `;

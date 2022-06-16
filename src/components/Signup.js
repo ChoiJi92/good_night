@@ -30,30 +30,37 @@ const Signup = () => {
     // 유효성 검사
     const signup = async () => {
       // 회원가입 정보 란 비어있을때
-      if (
-        email_ref.current.value === "" ||
-        password_ref.current.value === "" ||
-        nickName_ref.current.value === ""
-      ) {
-        window.alert("정보를 입력해주세요.");
-        return;
-      }
+      // if (
+      //   email_ref.current.value === "" ||
+      //   password_ref.current.value === "" ||
+      //   nickName_ref.current.value === ""
+      // ) {
+      //   window.alert("정보를 입력해주세요.")
+      //   email_ref.current.focus()
+      //   return;
+      // }
       // 이메일 체크
       if (!emailCheck(email_ref.current.value)) {
         window.alert("이메일 형식이 맞지 않습니다!");
-        return;
+        email_ref.current.focus()
+      }
+      // 닉네임 작성 여부 체크
+      else if (!nickName_ref.current.value){
+        window.alert("닉네임을 입력해주세요.")
+        nickName_ref.current.focus()
       }
       // 비밀번호 체크
-      if (!passwordCheck(password_ref.current.value)) {
+      else if (!passwordCheck(password_ref.current.value)) {
         window.alert(
           "비밀번호는 8자 이상 영문, 숫자 및 특수문자조합으로 작성하세요!"
-        );
-        return;
+        )
+        password_ref.current.focus()
       }
       //비밀번호 확인 체크
-      if (password_ref.current.value !== repeat_password_ref.current.value) {
+      else if (password_ref.current.value !== repeat_password_ref.current.value) {
         window.alert("비밀번호가 일치하지 않습니다.");
-        return;
+        repeat_password_ref.current.focus()
+        
       } else {
         dispatch(createUserDB({
             email: email_ref.current.value,
@@ -75,7 +82,7 @@ const Signup = () => {
             <Input>
               <label htmlFor="email">이메일</label>
               <br />
-              <input id="email" type="email" ref={email_ref} required></input>
+              <input id="email" type="email" ref={email_ref} required autoFocus></input>
               <p>이메일을 작성해주세요!</p>
             </Input>
             <Input>
@@ -130,7 +137,7 @@ const SignupHeader = styled.div`
 `;
 
 const SignupWrap = styled.div`
-    margin-top: 30px;
+    margin: 30px;
     background-color: #202133;
     height: 60%;
     width: 30%;
@@ -158,7 +165,8 @@ const Input = styled.div`
         border: none;
         border: 0 solid #000;
         border-radius: 7px;
-        padding:5px
+        padding:5px;
+        outline-color:#F5BD25
     }
 `;
 
